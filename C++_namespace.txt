@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+namespace FirstMade {
+	void MyFunc();
+	
+}
+namespace SecondMade {
+	void MyFunc();
+	
+}
+
+
+int main()
+{
+	FirstMade::MyFunc();
+	SecondMade::MyFunc();
+}
+
+void FirstMade::MyFunc(){
+	cout << "My Function from First Made namespace" << endl;
+}
+
+void SecondMade::MyFunc() {
+	cout << "My Function from Second Made namespace" << endl;
+}
