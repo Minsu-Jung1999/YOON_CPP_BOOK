@@ -1,0 +1,19 @@
+#include <iostream>
+#define SQUARE(x) ((x)*(x))
+using namespace std;
+
+inline int MULTIPLY(int x) {
+	return x * x;
+}
+
+template <typename T>
+inline T INLINEUSINGTEMPLATE(T x)
+{
+	return x * x;
+}
+
+int main()
+{
+	cout << INLINEUSINGTEMPLATE(12) << endl;
+	cout << INLINEUSINGTEMPLATE(5.2) << endl;
+}
