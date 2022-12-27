@@ -16,7 +16,7 @@ public:
 	void Deposit(UserInforamtion* user,int size);			// 출금
 	void Withdraw(UserInforamtion* user, int size);			// 입금
 
-	~UserInforamtion();										// 생성했으면 삭제도 해 줘야 GC 가 발생하지 않는다.
+	~UserInforamtion();										// 소멸자. 삭제도 해 줘야 GC 가 발생하지 않는다.
 };
 
 void MenuScreen();											// 메뉴 화면
