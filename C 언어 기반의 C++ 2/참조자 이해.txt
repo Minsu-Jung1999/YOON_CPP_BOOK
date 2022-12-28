@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+
+void Ref() {
+	int a = 10;
+	int& b = a;
+	cout << "a = " << a << "\t" << "&a = " << &a << endl;
+	cout << "b = " << b << "\t" << "&b = " << &b << endl;
+	b--;
+	cout << "a = " << a << "\t" << "&a = " << &a << endl;
+	cout << "b = " << b << "\t" << "&b = " << &b << endl;
+}
+
+void PtrRef() {
+	int num = 12;
+	int* ptr = &num;
+	int** dptr = &ptr;
+
+	int& ref = num;
+	int* (&pref) = ptr;
+	int** (&dpref) = dptr;
+
+	cout << ref << endl;
+	cout << *pref << endl;
+	cout << **dpref << endl;
+}
+void SwapRef(int* a, int* b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void SwapMain() {
+
+	int a = 10;
+	int b = 5;
+	cout << "a = " << a << endl;
+	cout << "b = " << b << endl;
+	SwapRef(&a, &b);
+	cout << "a = " << a << endl;
+	cout << "b = " << b << endl;
+}
+int* Increseaddress(int* ptr) {
+	return ptr + 1;
+}
+void SwapByRef(int& a, int& b) {
+	int temp = a;
+	a = b;
+	b = temp;
+}
+int AddRef(int& a) {
+	return ++a;
+}
+void SwapPtr(int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void SwapPtrcall() {
+	int num1 = 5;
+	int* ptr1 = &num1;
+	int num2 = 10;
+	int* ptr2 = &num2;
+	SwapPtr(ptr1, ptr2);
+	cout << "ptr1 = " << *ptr1 << endl;
+	cout << "ptr2 = " << *ptr2 << endl;
+}
+int& RefReturn(int& ref) {
+	ref++;
+	cout << "ref = " << ref << endl;
+	return ref;
+}
+
+int main()
+{
+	const int num = 12;
+	const int* ptr = &num;
+	const int& pref = *ptr;
+
+}
+
