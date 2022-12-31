@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+struct Car {
+	char gameID[100];
+	int fuelGauge = 100;
+	int curSpeed = 30;
+
+	void CurrentState() {
+		cout << "================== Current State ==================" << endl;
+		cout << "Gas Left : " << fuelGauge << endl;
+		cout << "Current Speed : " << curSpeed << endl;
+		cout << endl;
+		cout << endl;
+		cout << endl;
+	}
+
+	void Accel(int acc = 0)
+	{
+		fuelGauge -= 10 + acc;
+		curSpeed += 10 + acc;
+		cout << "================== Hit The Gas! ==================" << endl;
+		cout << "Gas Left : " << fuelGauge << endl;
+		cout << "Current Speed : " << curSpeed << endl;
+	}
+};
+
+
+
+int main()
+{
+	Car car1;
+	Car car2;
+	
+	car1.CurrentState();
+	car1.Accel();
+	cout << endl;
+	cout << endl;
+	cout << endl;
+
+	car2.CurrentState();
+	car2.Accel(60);
+
+}
