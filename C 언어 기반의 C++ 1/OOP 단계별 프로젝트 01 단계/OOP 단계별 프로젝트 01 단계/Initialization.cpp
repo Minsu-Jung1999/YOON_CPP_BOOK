@@ -23,15 +23,15 @@ void MenuScreen() {
 // UserInformation 클래스로 만들어진 배열 변수에 주소를 갖고온다. 
 // 주소와 사이즈를 직접 받아옴으로써 배열에 값에 직접 접근할 수 있음.
 // 해당 인덱스에 클래스 변수에 데이터를 담아줌
-void UserInforamtion::MakeAccount(UserInforamtion *user,int index){
+void UserInforamtion::MakeAccount(int index){
 	int money=0;
 	cout << "[ Make Account]" << endl;
 	cout << "Accout ID: ";
-	cin >>  user[index].account_id;
+	cin >>  account_id;
 	cout << "Name : ";
-	cin >> user[index].client_name;
+	cin >> client_name;
 	cout << "Deposit Money : ";
-	cin >> user[index].money;
+	cin >> money;
 }
 
 // 직접 접근을 통해서 값 변경 가능 MakeMoney 함수와 기법 동일함

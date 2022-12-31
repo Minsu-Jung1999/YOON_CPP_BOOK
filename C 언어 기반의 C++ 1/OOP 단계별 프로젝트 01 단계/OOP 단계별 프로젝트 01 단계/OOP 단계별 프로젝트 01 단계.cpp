@@ -16,7 +16,7 @@ int main()
 		switch (user_choice)						// switch 문으로 가독성 증가 하지만 if 문보다 다소 느릴 수 있음
 		{
 		case 1:
-			client->MakeAccount(client, accounter_number);		// client 를 넘겨주면서 배열에 처음 요소에 주소 즉 배열을 통채로 넘겨준다.
+			client->MakeAccount(accounter_number);		// client 를 넘겨주면서 배열에 처음 요소에 주소 즉 배열을 통채로 넘겨준다.
 			accounter_number++;									// 새로 만들었을 때만 고객수 증가
 			break;
 		case 2:

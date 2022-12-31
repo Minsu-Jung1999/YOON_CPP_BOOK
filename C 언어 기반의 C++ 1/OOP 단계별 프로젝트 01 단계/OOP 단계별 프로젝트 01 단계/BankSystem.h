@@ -12,7 +12,7 @@ public:
 public:
 
 	UserInforamtion();										// 생성자 -> 데이터 초기화 근데 지금은 없어도 될 듯 
-	void MakeAccount(UserInforamtion *user,int size);		// 계좌계설
+	void MakeAccount(int size);		// 계좌계설
 	void Deposit(UserInforamtion* user,int size);			// 출금
 	void Withdraw(UserInforamtion* user, int size);			// 입금
 
