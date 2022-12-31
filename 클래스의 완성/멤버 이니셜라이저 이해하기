@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class Point {
+	int xpos;
+	int ypos;
+
+public:
+	Point(int x, int y)
+	{
+		xpos = x;
+		ypos = y;
+	}
+	int Getx() { return xpos; }
+	int Gety() { return ypos; }
+};
+
+class Rectangle {
+
+	Point point1;
+	Point point2;
+
+public:
+	Rectangle(int x, int y) :point1(x, y), point2(y, x) {}
+
+	void Showinfo()
+	{
+		cout << "Point 1 inf" << endl;
+		cout << "x = " << point1.Getx() << endl;
+		cout << "y = " << point1.Gety() << endl;
+		cout << "x = " << point2.Getx() << endl;
+		cout << "y = " << point2.Gety() << endl;
+	}
+};
+
+int main()
+{
+	Rectangle* rec = new Rectangle(2, 3);
+	rec->Showinfo();
+}
+
