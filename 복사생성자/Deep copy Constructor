@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Person {
+	char* name;
+	int age;
+
+public:
+	/*Person()
+	{
+		name = NULL;
+		age = 0;
+		cout << "Called Empty Person Constructor" << endl;
+	}*/
+	Person(const char* my_name, int my_age)
+	{
+		int len = strlen(my_name) + 1;
+		name = new char[len];
+		strcpy(name, my_name);
+		age = my_age;
+	}
+	Person(Person& copy) :age(copy.age)
+	{
+		name = new char[strlen(copy.name) + 1];
+		strcpy(name, copy.name);
+	}
+	void SetPersonInfo(char* my_name, int my_age)
+	{
+		name = my_name;
+		age = my_age;
+	}
+	void ShowPersonInfo()
+	{
+		cout << "Name: " << name << endl;
+		cout << "Age: " << age << endl;
+	}
+	~Person()
+	{
+		cout << name << endl;
+		delete[]name;
+		cout << "Called destructor" << endl;
+	}
+};
+
+int main()
+{
+	Person man1("SDLkfj",24);
+	Person man2 = man1;
+	man1.ShowPersonInfo();
+	man2.ShowPersonInfo();
+}
