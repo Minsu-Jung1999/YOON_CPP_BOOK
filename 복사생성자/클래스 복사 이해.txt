@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+class Simple {
+    int a;
+public:
+    Simple(int a) :a(a) {}
+    int Show() { return a; }
+    void Add() { a++; }
+};
+
+
+int main()
+{
+    Simple sim1(50);
+    Simple &sim2 = sim1;
+    sim1.Add();
+    cout << sim1.Show() << endl;
+    cout << sim2.Show() << endl;
+    cout << &sim1 << endl;
+    cout << &sim2 << endl;
+
+}
+
