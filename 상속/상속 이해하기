@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class Person
+{
+	int age;
+	char name[50];
+public:
+	Person(int my_age, const char* my_name) : age(my_age)
+	{
+		strcpy_s(name, my_name);
+		cout << "Person called" << endl;
+	}
+	void WhatYourName()
+	{
+		cout << "My name is " << name << endl;
+	}
+};
+
+class Student :public Person
+{
+	char major[50];
+
+public:
+	Student(const char* my_name, int age, const char* my_major) :Person(age, my_name)
+	{
+		strcpy(major, my_major);
+		cout << "Student called" << endl;
+	}
+	void WhoAreYou()
+	{
+		WhatYourName();
+		cout << "My major is " << major << endl;
+		
+	}
+};
+
+int main()
+{
+	Student st("Lee", 24, "CS");
+	st.WhoAreYou();
+}
