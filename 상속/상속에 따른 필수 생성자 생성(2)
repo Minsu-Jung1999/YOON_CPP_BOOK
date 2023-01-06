@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+using namespace std;
+
+class MyFriendInfo
+{
+	char* name;
+	int age;
+public:
+	MyFriendInfo(char* f_name, int f_age) :age(f_age)
+	{
+		name = new char[strlen(f_name) + 1];
+		strcpy(name, f_name);
+	}
+	void ShowMyFriendInfo()
+	{
+		cout << "이름: " << name << endl;
+		cout << "나이: " << age << endl;
+	}
+};
+class MyFriendDetailInfo : public MyFriendInfo
+{
+	char* addr;
+	char* phone;
+public:
+	MyFriendDetailInfo(char* f_name, int f_age, char* f_addr, char* f_phone):MyFriendInfo(f_name,f_age)
+	{
+		addr = new char[strlen(f_addr) + 1];
+		phone = new char[strlen(f_phone) + 1];
+		strcpy(addr, f_addr);
+		strcpy(phone, f_phone);
+	}
+	void SHowMyFriendDetailInfo()
+	{
+		ShowMyFriendInfo();
+		cout << "주소 :" << addr << endl;
+		cout << "전화: " << phone << endl << endl;
+	}
+};
+int main()
+{
+	char name[20];
+	char addr[100];
+	char phone[50];
+	cin >> name;
+	cin >> addr;
+	cin >> phone;
+	MyFriendInfo han_info(name, 25);
+	MyFriendDetailInfo han_detail(name, 25, addr, phone);
+	han_detail.ShowMyFriendInfo();
+	han_detail.SHowMyFriendDetailInfo();
+
+}
+
