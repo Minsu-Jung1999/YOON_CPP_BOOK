@@ -1,0 +1,182 @@
+/*Minsu Jung*/
+/*CS& 131 - Jinhui Liu*/
+/*Unit 10 */
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+#define MAX_ACCTS 100
+
+int accounts[MAX_ACCTS];
+double balances[MAX_ACCTS];
+int numOfActiveAccts = 0;
+
+void readAccountInfo(void) {
+	FILE* accountfile_p;
+	int i, status;
+	int accountID;
+	double balance;
+	accountfile_p = fopen("accounts.txt", "r");
+	if (accountfile_p != NULL) {
+		for (i = 0; i < MAX_ACCTS; i++) {
+			status = fscanf(accountfile_p, "%d %lf", &accountID, &balance);
+			if (status != EOF) {
+				accounts[i] = accountID;
+				balances[i] = balance;
+			}
+			else {
+				break;
+			}
+		}
+		numOfActiveAccts = i;
+		fclose(accountfile_p);
+	}
+	else {
+		printf("File could not be opened.\n");
+	}
+}
+
+void writeAccountInfo(void) {
+	FILE* accountfile_p;
+	int i;
+	accountfile_p = fopen("accounts.txt", "w");
+	if (accountfile_p != NULL) {
+		for (i = 0; i < numOfActiveAccts; i++) {
+			fprintf(accountfile_p, "%d %.2f\n", accounts[i], balances[i]);
+		}
+	}
+	fclose(accountfile_p);
+}
+int findAccount(int accountID) {
+	int index = -1;
+	/* Use a linear search to find the accountID in the accounts array. */
+	/* If found, return the index. */
+	for (int i = 0; i < numOfActiveAccts; i++)
+	{
+		if (accounts[i] == accountID)
+		{
+			index = i;
+			break;
+		}
+	}
+	/* If not found, return -1 */
+	return(index);
+}
+
+void printAccountBal(int accountIndex) {
+	/* Write this function. Use the account index
+	 * to find and print the account balance.
+	 * Use good human factor design in your output.
+	 * Use correct format for currency. */
+
+	printf("Account ID: %d\n", accounts[accountIndex]);
+	printf("Current balance: $%.2f\n", balances[accountIndex]);
+}
+
+void deposit(int accountIndex) {
+	/* Write this function. Use the account index
+	 * to access the account balance.
+	 * Prompt for a deposit amount. The deposit amount
+	 * should be greater than 0.
+	 * Update the balance in the array. */
+
+	double depositAmount;
+	do {
+		printf("Enter deposit amount: ");
+		scanf("%lf", &depositAmount);
+		if (depositAmount <= 0) {
+			printf("Deposit amount must be greater than 0.\n");
+		}
+	} while (depositAmount <= 0);
+	balances[accountIndex] += depositAmount;
+}
+
+void withdraw(int accountIndex) {
+	/* Write this function. Use the account index
+	 * to access the account balance.
+	 * Prompt for a withdrawal amount.
+	 * The withdrawal amount should be greater than 0.
+	 * Make sure the withdrawal amount is not more than the balance.
+	 * If the amount exceeds the balance,
+	 * provide an error message and ask for a new withdrawal amount.
+	 * Update the balance in the array. */
+	double withdrawAmount;
+	do {
+		printf("Enter withdrawal amount: ");
+		scanf("%lf", &withdrawAmount);
+		if (withdrawAmount <= 0) {
+			printf("Withdrawal amount must be greater than 0.\n");
+		}
+		else if (withdrawAmount > balances[accountIndex]) {
+			printf("Insufficient funds. Current balance is $%.2f\n", balances[accountIndex]);
+		}
+	} while (withdrawAmount <= 0 || withdrawAmount > balances[accountIndex]);
+	balances[accountIndex] -= withdrawAmount;
+}
+
+int main(void) {
+	int choice;
+	int accountID, accountIndex;
+	int accountIDgood;
+
+	printf("Bank account simulator\n");
+	readAccountInfo();
+	if (numOfActiveAccts > 0)
+		printf("%d accounts loaded from the file.\n",numOfActiveAccts);
+	else
+		printf("no account information was load from the account file.\n");
+
+	do {
+		accountIDgood = 0;	/* False */
+		do {
+			printf("\nEnter account ID: ");
+			scanf("%d", &accountID);
+			if (accountID < 20000 || accountID > 29999) {
+				printf("Account ID is not correct format.\n");
+			}
+			else {
+				accountIndex = findAccount(accountID);
+				if (accountIndex == -1) {
+					printf("Account ID %d is not valid.\n",
+						accountID);
+				}
+				else {
+					accountIDgood = 1;	/* True */
+				}
+			}
+		} while (!accountIDgood);
+
+		printAccountBal(accountIndex);
+
+		do {
+			printf("Choose from the following menu:\n");
+			printf("\t0 - Exit the program\n");
+			printf("\t1 - Change accounts\n");
+			printf("\t2 - Make deposit\n");
+			printf("\t3 - Make withdrawal\n");
+			printf("Enter your choice: ");
+			scanf("%d", &choice);
+			printf("\n");
+
+			switch (choice) {
+			case 2:
+				deposit(accountIndex);
+				printAccountBal(accountIndex);
+				break;
+			case 3:
+				withdraw(accountIndex);
+				printAccountBal(accountIndex);
+				break;
+			default:
+				if (choice != 0 && choice != 1) {
+					printf("Your choice (%d) is not valid.\n",
+						choice);
+				}
+				break;
+			}
+		} while (choice != 0 && choice != 1);
+	} while (choice != 0);
+	
+	if(numOfActiveAccts>0)
+		writeAccountInfo();
+	return(0);
+}
